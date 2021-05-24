@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.0 r1840935">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="HawkEye Dashboard Backup" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="Path" elementType="Argument">
+            <stringProp name="Argument.name">Path</stringProp>
+            <stringProp name="Argument.value">D:/apache-jmeter-5.0/Scripts/gBeats/HawkEye-DashboardBackup/dashboards/</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+        </collectionProp>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time"></stringProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration">3600</stringProp>
+        <stringProp name="ThreadGroup.delay">10</stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="Declare Variables  " enabled="true">
+          <collectionProp name="UserParameters.names">
+            <stringProp name="1018109815">AuthKey</stringProp>
+            <stringProp name="-849009829">AuthKey-1</stringProp>
+            <stringProp name="1809128779">grafanaURL</stringProp>
+            <stringProp name="-992385477">dashboardURL</stringProp>
+            <stringProp name="-1826698494">baseURL-1</stringProp>
+            <stringProp name="-332626722">baseURL</stringProp>
+            <stringProp name="3446913">port</stringProp>
+          </collectionProp>
+          <collectionProp name="UserParameters.thread_values">
+            <collectionProp name="1248451915">
+              <stringProp name="-198190012">Basic YWRtaW46aGF3a2V5ZUBjdHM=</stringProp>
+              <stringProp name="-430172282">Basic YWRtaW46cGFzc3dvcmQ= </stringProp>
+              <stringProp name="971920437">api/search?folderIds=</stringProp>
+              <stringProp name="757978010">api/dashboards/uid/</stringProp>
+              <stringProp name="-1204607085">localhost</stringProp>
+              <stringProp name="-563907504">3.130.52.82</stringProp>
+              <stringProp name="1567005">3000</stringProp>
+            </collectionProp>
+          </collectionProp>
+          <boolProp name="UserParameters.per_iteration">false</boolProp>
+          <stringProp name="TestPlan.comments">3.130.52.82 	</stringProp>
+        </UserParameters>
+        <hashTree/>
+        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="JSR223 Sampler" enabled="true">
+          <stringProp name="cacheKey">true</stringProp>
+          <stringProp name="filename"></stringProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="script">import groovyx.net.http.HTTPBuilder
+import static groovyx.net.http.Method.GET
+import static groovyx.net.http.ContentType.TEXT
+import groovy.json.*
+import groovy.json.JsonOutput
+
+def lsURL = &quot;http://&quot; + &quot;${baseURL}:${port}/${grafanaURL}&quot;+&quot;0&quot; ;
+
+retrieveDataFromService( lsURL, false); 
+
+public String retrieveDataFromService(psURL, bWriteToFile){ 
+ 
+ 	log.info(&quot;\n\n\n ********* psURL=&quot;+ psURL);
+	def http = new HTTPBuilder( psURL ) ;
+
+	http.request(GET,TEXT) { req -&gt;
+		headers.&apos;authorization&apos; = &apos;${AuthKey}&apos;
+
+		response.success = { resp, reader -&gt;  
+			def jsonContent =resp.entity.content.text ;
+			// log.info(&quot;\n Response \n &quot; +  JsonOutput.prettyPrint(jsonContent)  );
+			def jsonSlurper = new JsonSlurper();
+			def respObj = jsonSlurper.parseText(jsonContent);
+			
+			if(bWriteToFile){
+				String  ls_DirName = &quot;dashboards/&quot; +respObj.meta.folderTitle ;
+				//log.info(&quot;\n\n Check Dir  exists =&quot; + ls_DirName ); 
+				File dirObj = new File(ls_DirName);
+				
+				if (! dirObj.exists())  { 
+					//create directory and add files to it.
+					log.info(&quot;\n  Create Dir  =&quot; + ls_DirName ); 
+					dirObj.mkdirs();	
+				}
+				else 
+					log.info(&quot;\n  Dir  exists =&quot; + ls_DirName ); 
+				
+				File file = new File( ls_DirName +&quot;/&quot; + respObj.dashboard.title +&quot;.json&quot;);
+				file.write(new JsonBuilder( respObj.dashboard ).toPrettyString() ) ;
+			}	
+			else{
+					respObj.each { recordData -&gt; 
+						
+						if(recordData.type ==&apos;dash-folder&apos;){
+							log.info(&apos;folder :&apos; +  recordData.id);
+							retrieveDataFromService(&quot;http://&quot; +&quot;${baseURL}:${port}/${grafanaURL}&quot;+recordData.id,  false);
+						}
+						else{
+							log.info(&apos;file :&apos; + recordData.uid + &apos;\n&apos;);
+							retrieveDataFromService(&quot;http://&quot; +&quot;${baseURL}:${port}/${dashboardURL}&quot; +recordData.uid, true);
+						}
+					} 
+				}
+		} 
+	} 
+}
+
+
+</stringProp>
+          <stringProp name="scriptLanguage">groovy</stringProp>
+        </JSR223Sampler>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="HTTP Request : datasources" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">${baseURL}</stringProp>
+          <stringProp name="HTTPSampler.port">${port}</stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">/api/datasources</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Content-Type</stringProp>
+                <stringProp name="Header.value">application/json</stringProp>
+              </elementProp>
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">authorization</stringProp>
+                <stringProp name="Header.value">${AuthKey}</stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree/>
+          <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="GenerateDataSourcesList" enabled="true">
+            <stringProp name="scriptLanguage">groovy</stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="script">import groovy.sql.Sql
+import java.sql.*
+import java.util.io.*;
+import java.lang.io.*;
+import groovy.json.JsonOutput;
+
+//log.info(&quot;\n\n  WebService ResponseCode :&quot; + ctx.getPreviousResult().getResponseCode() + &quot;\n&quot;);
+String respContent = prev.getResponseDataAsString();
+log.info(JsonOutput.prettyPrint(respContent) );
+
+String  ls_DirName = &quot;dashboards/datasource&quot;  ;
+//log.info(&quot;\n\n Check Dir  exists =&quot; + ls_DirName ); 
+File dirObj = new File(ls_DirName);
+
+if (! dirObj.exists())  { 
+	//create directory and add files to it.
+	log.info(&quot;\n  Create Dir  =&quot; + ls_DirName ); 
+	dirObj.mkdirs();	
+}
+else 
+	log.info(&quot;\n  Dir  exists =&quot; + ls_DirName ); 
+
+File file = new File( ls_DirName +&quot;/dataSourcesList.txt&quot;);
+file.write(JsonOutput.prettyPrint(respContent)) ;</stringProp>
+          </JSR223PostProcessor>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="HTTP Request : teams" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">${baseURL}</stringProp>
+          <stringProp name="HTTPSampler.port">${port}</stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">/api/teams/search</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Content-Type</stringProp>
+                <stringProp name="Header.value">application/json</stringProp>
+              </elementProp>
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">authorization</stringProp>
+                <stringProp name="Header.value">${AuthKey}</stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree/>
+          <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="GenerateTeamsList" enabled="true">
+            <stringProp name="scriptLanguage">groovy</stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="script">import groovy.sql.Sql
+import java.sql.*
+import java.util.io.*;
+import java.lang.io.*;
+import groovy.json.JsonOutput;
+
+//log.info(&quot;\n\n  WebService ResponseCode :&quot; + ctx.getPreviousResult().getResponseCode() + &quot;\n&quot;);
+String respContent = prev.getResponseDataAsString();
+log.info(JsonOutput.prettyPrint(respContent) );
+
+String  ls_DirName = &quot;dashboards/teams&quot;  ;
+//log.info(&quot;\n\n Check Dir  exists =&quot; + ls_DirName ); 
+File dirObj = new File(ls_DirName);
+
+if (! dirObj.exists())  { 
+	//create directory and add files to it.
+	log.info(&quot;\n  Create Dir  =&quot; + ls_DirName ); 
+	dirObj.mkdirs();	
+}
+else 
+	log.info(&quot;\n  Dir  exists =&quot; + ls_DirName ); 
+
+File file = new File( ls_DirName +&quot;/teams.txt&quot;);
+file.write(JsonOutput.prettyPrint(respContent)) ;</stringProp>
+          </JSR223PostProcessor>
+          <hashTree/>
+        </hashTree>
+        <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler" enabled="true">
+          <boolProp name="displayJMeterProperties">false</boolProp>
+          <boolProp name="displayJMeterVariables">true</boolProp>
+          <boolProp name="displaySystemProperties">false</boolProp>
+        </DebugSampler>
+        <hashTree/>
+      </hashTree>
+      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <url>true</url>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ResultCollector guiclass="TableVisualizer" testclass="ResultCollector" testname="View Results in Table" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <url>true</url>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>

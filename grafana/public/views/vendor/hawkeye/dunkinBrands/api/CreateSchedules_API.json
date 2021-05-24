@@ -1,0 +1,41 @@
+{
+	"_description":"This is contract between HawkEye frontend and Backend API for CreateSchedules feature",
+	"_Comment":"Either stores element or storeGroups element will be present",
+	"_todo":" Custom Activity structure ",
+	
+	"action":"CREATE",
+	"softwareId":"dunkin_store_schedules.software_id", 
+	"softwareVersion":"dunkin_store_schedules.version",
+	"scheduleStatus":" dunkin_store_schedules.status. Assuming front end will compute and send to backend. This is computed & derived based on all Activity level statuses.",
+	"scheduleStartDt":"dunkin_store_schedules.start_date",
+	"scheduleEndDt":"dunkin_store_schedules.end_date",
+	"scheduleUserId":"dunkin_store_schedules.login_id",
+	"Notes":"dunkin_store_schedules.notes",
+	
+	"stores":["300208","300205","300204"],
+	"storeGroups":[
+					{"storeGroupId":"615252","type":"POS"},
+					{"storeGroupId":"615252","type":"KDS"},
+					{"storeGroupId":"762811","type":"POS"},
+					{"storeGroupId":"800561","type":"KDS"}
+				  ], 
+	"_Comment":"dunkin_store_terminal_data",
+	"stdActivityIDs":["A34544975","A4497590","A088834975","A45475","A4497598 ","A088975"],
+	"_Comment":"dunkin_store_schedule_activities  reverse look up. need to add type. dunkin_activities_master and pull out the all the required attributes for dunkin_store_schedule_activities.",
+	"technicianIDs":["T222","T34344","T85544","T34399"],
+	"_Comment":"dunkin_schedule_technician_assignment_details.. V1.0 - schedule level.",
+	"newActivities":[{
+							"_description_2" :" ActivityID to be generated from backend and linked to Schedule", 
+							"activityType":"Standard|PreRequisite",
+							"addToDefaultActivityMaster":"Y",
+							"activityStatus":"NotStarted|InProgress|Completed|Aborted|OnHold",
+							"activityName":"",
+							"activityDescription":"",
+							"preRequisite":"",
+							"activityStartDate":"",
+							"activityEndDate":"",
+							"activityNotes":"" 
+						}  
+					],
+	"_Comment":" dunkin_store_schedule_activities. No need for reverse look up."
+}

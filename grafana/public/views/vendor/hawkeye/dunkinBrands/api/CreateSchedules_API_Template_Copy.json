@@ -1,0 +1,32 @@
+{
+"modifyUserId": "",
+"brand": "",
+"scheduleId": "",
+"softwareId": "",
+"scheduleStatus": "",
+"statusNotes": "",
+"scheduleOriginalStartDt": "",
+"scheduleStartDt": "",
+"scheduleEndDt": "",
+"notes": "",
+"stdActivityIDs": [""],
+"newActivities": [
+    {
+      "activityDetails": "",
+      "activityEndDate": "",
+      "activityName": "",
+      "activityPreRequisite": "",
+      "activityReference": "",
+      "activityStartDate": "",
+      "activityStatus": "",
+      "activityType": "",
+      "addToDefaultActivityMaster": ""
+    }
+  ],
+  
+ "technicianIDs": [""],
+ "preReqStatus": "",
+ "preReqEndDt": "",
+ "ActivityAction": "",
+ "TechnicianAction": ""	
+}

@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.0 r1840935">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Load Data To Table - dunkin_storeMaster" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="Path" elementType="Argument">
+            <stringProp name="Argument.name">Path</stringProp>
+            <stringProp name="Argument.value">../Scripts/gBeats/DunkinBrands</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+        </collectionProp>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time"></stringProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="Declare Variables " enabled="true">
+          <collectionProp name="UserParameters.names">
+            <stringProp name="683298547">jdbcURLForDB</stringProp>
+            <stringProp name="-891764799">dataBaseUserId</stringProp>
+            <stringProp name="-1813836894">dataBasePwd</stringProp>
+            <stringProp name="-1379259997">dataBaseDriver</stringProp>
+            <stringProp name="-735721945">fileName</stringProp>
+          </collectionProp>
+          <collectionProp name="UserParameters.thread_values">
+            <collectionProp name="-249604978">
+              <stringProp name="-524080442">jdbc:postgresql://localhost:5432/postgres?autoReconnect=true</stringProp>
+              <stringProp name="757584761">postgres</stringProp>
+              <stringProp name="1216985755">password</stringProp>
+              <stringProp name="-1662518376">org.postgresql.Driver</stringProp>
+              <stringProp name="1250119772">outbound_core_usd_20201021.csv</stringProp>
+            </collectionProp>
+          </collectionProp>
+          <boolProp name="UserParameters.per_iteration">false</boolProp>
+          <stringProp name="TestPlan.comments">jdbc:postgresql://34.70.253.231:5432/postgres?autoReconnect=true </stringProp>
+        </UserParameters>
+        <hashTree/>
+        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="false">
+          <stringProp name="filename">../Scripts/gBeats/DunkinBrands/outbound_core_usd_20201021.csv</stringProp>
+          <stringProp name="fileEncoding"></stringProp>
+          <stringProp name="variableNames">pfcntr,dma_code,dma_desc,open_brands_desc,opertnl_stat_code,legal_entity_name,city_name,state_code,cnty_name,zip_code,cntry,latitude,longitude </stringProp>
+          <boolProp name="ignoreFirstLine">true</boolProp>
+          <stringProp name="delimiter">,</stringProp>
+          <boolProp name="quotedData">true</boolProp>
+          <boolProp name="recycle">false</boolProp>
+          <boolProp name="stopThread">true</boolProp>
+          <stringProp name="shareMode">shareMode.all</stringProp>
+        </CSVDataSet>
+        <hashTree/>
+        <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor-AddEventDates" enabled="true">
+          <stringProp name="filename"></stringProp>
+          <stringProp name="parameters"></stringProp>
+          <boolProp name="resetInterpreter">false</boolProp>
+          <stringProp name="script">import java.text.*;
+
+SimpleDateFormat dateFormat = new SimpleDateFormat(&quot;yyyy-MM-dd&apos;T&apos;HH:mm:ssZ&quot;);
+
+Calendar cal = Calendar.getInstance();
+cal.setTime(new Date()); // Now use today date.
+cal.add(Calendar.DATE, 0); // Adding/subtracting 5 days
+vars.put(&quot;eventDate&quot;,dateFormat.format(cal.getTime()));
+
+log.info(&quot;\n\n ----------- eventDate  :&quot; + dateFormat.format(cal.getTime()));</stringProp>
+        </BeanShellPreProcessor>
+        <hashTree/>
+        <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Data_Process_In_Batches" enabled="true">
+          <stringProp name="scriptLanguage">groovy</stringProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="filename"></stringProp>
+          <stringProp name="cacheKey">false</stringProp>
+          <stringProp name="script">import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List; 
+import groovy.sql.Sql;
+import java.util.regex.Pattern;
+
+//------------
+
+readFileContentAndInsertToTable();
+
+//------------
+
+public String readFileContentAndInsertToTable(){  
+
+	String sql_Prefix =&quot;INSERT into dunkin_storeMaster (pfcntr,dma_code ,dma_desc ,open_brands_desc, opertnl_stat_code, &quot;  +
+					  &quot; legal_entity_name,City,State,County,ZipCode,Country, &quot;+
+					  &quot; latitude ,longitude ,createts ,modifyts) VALUES (&quot; ;
+
+	String sql_Suffix =&quot; ) ON CONFLICT DO NOTHING ;&quot;;  
+	
+	String currentDate = vars.get(&quot;eventDate&quot;); //for setting createTs and modifTs
+	Path currentDir  = Paths.get(&quot;${Path}&quot; );
+	//log.info( currentDir.toAbsolutePath().toString()); 
+	String gs_DataFileName= currentDir.toAbsolutePath().toString() +&quot;/&quot;+ vars.get(&quot;fileName&quot;); 
+	String regexReplaceToken = &apos;,(?!(([^&quot;]*&quot;){2})*[^&quot;]*$)&apos;; //replace comma from quoted columns else it causes arrayOutofBound Exception
+	List&lt;String&gt; listOfQueries = [];  
+
+	log.info(&quot;\n\n ...............................................................  .............&quot;);
+	
+	try {
+			def lines = new File(gs_DataFileName).eachLine { line, number -&gt;
+				 
+				if(line != null &amp;&amp; line.length() &gt;10 &amp;&amp; number &gt; 1){  //if not empty line and header line
+					//log.info(&quot;#&quot;+ number+ &quot; Cols=&quot; + line.split(&quot;,&quot;).size());
+					
+ 					line =line.replaceAll(regexReplaceToken, &quot;&quot;);
+ 					line =line.replaceAll(&quot;&apos;&quot;, &quot;&apos;&apos;&quot;); // replace single quotes with 2 single quotes else SQl exception
+					//log.info(&quot;replaced tokens &quot;+ line);
+					
+					String[] dataFieldsList = line.split(&quot;,&quot;);
+					log.info(&quot;#&quot;+ number+ &quot; dataFieldsList=&quot; + dataFieldsList.size());
+					log.info( &quot; dataFieldsList=&quot; + dataFieldsList );		
+								
+					String ls_Query = sql_Prefix +&quot;&apos;&quot;  + dataFieldsList[0].trim() + &quot;&apos;,&quot; +
+											&quot;&apos;&quot;	+ dataFieldsList[1] + &quot;&apos;,&apos;&quot;	+ dataFieldsList[2] + &quot;&apos;,&quot; +
+											&quot;&apos;&quot;	+ dataFieldsList[3] + &quot;&apos;,&apos;&quot;	+ dataFieldsList[4] + &quot;&apos;,&quot; +
+											&quot;&apos;&quot;	+ dataFieldsList[5] + &quot;&apos;,&apos;&quot;	+ dataFieldsList[6] +&quot;&apos;,&quot; +
+											&quot;&apos;&quot;	+ dataFieldsList[7] + &quot;&apos;,&apos;&quot;	+ dataFieldsList[8] +&quot;&apos;,&quot; +
+											&quot;&apos;&quot;	+ dataFieldsList[9] + &quot;&apos;,&apos;&quot;	+ dataFieldsList[10] +&quot;&apos;,&quot; +
+											&quot;&apos;&quot;	+ dataFieldsList[11] + &quot;&apos;,&apos;&quot;	+ dataFieldsList[12] +&quot;&apos;,&quot; +
+											&quot;&apos;&quot;	+ currentDate + &quot;&apos;,&apos;&quot; + currentDate + &quot;&apos; &quot; + sql_Suffix   ;
+		
+					//accumulate into a list 
+					listOfQueries.add(ls_Query);   
+					//log.info( &quot; ls_Query=&quot; + ls_Query );
+				}  
+			}  //end of eachLine loop 
+			
+			executeBatchInsertQueries(listOfQueries);
+				
+		}catch (IOException e) {
+			log.info(e);
+		} 
+} // end of method
+
+	
+public String executeBatchInsertQueries(List&lt;String&gt; listOfQueries){ 
+
+ 	int batchSize =1000 ;
+	def gSqlConn = Sql.newInstance(vars.get(&quot;jdbcURLForDB&quot;),vars.get(&quot;dataBaseUserId&quot;),
+									vars.get(&quot;dataBasePwd&quot;), vars.get(&quot;dataBaseDriver&quot;)) ; 
+	
+	gSqlConn.withBatch(batchSize){ stmtObj -&gt; 
+		listOfQueries.each {query -&gt;
+				stmtObj.addBatch(query);
+		}
+	} 
+			
+}// end of method
+</stringProp>
+        </JSR223PostProcessor>
+        <hashTree/>
+        <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Read CSV Data into List" enabled="false">
+          <stringProp name="scriptLanguage">groovy</stringProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="filename"></stringProp>
+          <stringProp name="cacheKey">false</stringProp>
+          <stringProp name="script">import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List; 
+import java.util.ArrayList;
+import groovy.sql.Sql;
+//------------
+// author : R Samant   Dt: 25 Oct 2020
+// Todo : Last batch does not get executed . eg. Total records 12821 , batchSize=100, then 21 records dont go thru.
+// This approach takes 7 mins for 12k records whereas other one takes 4 secs. This does take care of spl characters in csv.
+
+readFileContentAndInsertToTable ();
+
+//------------
+
+public String readFileContentAndInsertToTable(){  
+
+	String sql_Prefix =&quot;INSERT into dunkin_storeMaster (pfcntr,dma_code ,dma_desc ,open_brands_desc, opertnl_stat_code, &quot;  +
+					  &quot; legal_entity_name, latitude ,longitude ,createts ,modifyts) VALUES (&quot; ;
+
+	String sql_Suffix =&quot; ) ON CONFLICT DO NOTHING ;&quot;;  
+	
+	String currentDate = vars.get(&quot;eventDate&quot;);
+	 
+	ArrayList listOfQueries =new ArrayList();
+ 	
+ 	if(vars.get(&quot;listOfQueries&quot;) != null)
+	listOfQueries= vars.getObject(&quot;listOfQueries&quot;);
+	
+	log.info(&quot;\n\n ............................................................... &quot; +listOfQueries.size());
+	
+	try {
+		 
+		String ls_Query = sql_Prefix +&quot;&apos;&quot;  + vars.get(&quot;pfcntr&quot;) + &quot;&apos;,&quot; +
+								&quot;&apos;&quot;	+ vars.get(&quot;dma_code&quot;) + &quot;&apos;,&apos;&quot;	+vars.get(&quot;dma_desc&quot;) + &quot;&apos;,&quot; +
+								&quot;&apos;&quot;	+ vars.get(&quot;open_brands_desc&quot;) + &quot;&apos;,&apos;&quot;	+vars.get(&quot;opertnl_stat_code&quot;) + &quot;&apos;,&quot; +
+								&quot;&apos;&quot;	+ vars.get(&quot;legal_entity_name&quot;) + &quot;&apos;,&apos;&quot;	+vars.get(&quot;latitude&quot;) + &quot;&apos;,&quot; + 
+								&quot;&apos;&quot;	+ vars.get(&quot;longitude&quot;) + &quot;&apos;,&apos;&quot; + currentDate + &quot;&apos;,&apos;&quot; +
+								currentDate +&quot;&apos; &quot; +  sql_Suffix   ;
+
+		listOfQueries.add( ls_Query );  
+		 
+		//accumulate into a list , batch of more than 100 will be a issue.
+		if(listOfQueries != null){ 
+			vars.putObject(&quot;listOfQueries&quot;, listOfQueries );
+			log.info(&quot;listOfQueries value =&quot; + listOfQueries);
+			log.info(&quot;listOfQueries size =&quot; + listOfQueries.size());
+
+			//execute if batch size reached and clear list in vars
+			if(listOfQueries.size() &gt; 99)
+			{
+				executeBatchInsertQueries(listOfQueries);
+				vars.remove(&quot;listOfQueries&quot;);
+			}
+		}
+		  
+				
+	}catch (IOException e) {
+		log.info(e);
+	} 
+} // end of method
+
+public String executeBatchInsertQueries(List&lt;String&gt; listOfQueries){ 
+
+ 	int batchSize =100 ;
+	def gSqlConn = Sql.newInstance(vars.get(&quot;jdbcURLForDB&quot;),vars.get(&quot;dataBaseUserId&quot;),
+									vars.get(&quot;dataBasePwd&quot;), vars.get(&quot;dataBaseDriver&quot;)) ; 
+	
+	gSqlConn.withBatch(batchSize){ stmtObj -&gt; 
+		listOfQueries.each {query -&gt;
+				stmtObj.addBatch(query);
+		}
+	} 
+
+	log.info(&quot;\n ..............................executeBatchInsertQueries  &quot; + listOfQueries.size() );
+			
+}// end of method
+</stringProp>
+        </JSR223PostProcessor>
+        <hashTree/>
+        <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler" enabled="true">
+          <boolProp name="displayJMeterProperties">false</boolProp>
+          <boolProp name="displayJMeterVariables">true</boolProp>
+          <boolProp name="displaySystemProperties">false</boolProp>
+        </DebugSampler>
+        <hashTree/>
+      </hashTree>
+      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <url>true</url>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ResultCollector guiclass="TableVisualizer" testclass="ResultCollector" testname="View Results in Table" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <url>true</url>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>

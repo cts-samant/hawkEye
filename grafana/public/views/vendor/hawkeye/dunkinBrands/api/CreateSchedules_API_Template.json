@@ -1,0 +1,36 @@
+{
+  "createUserId": "",
+  "brand": "",
+  "newActivities": [
+    {
+      "activityDetails": "",
+      "activityEndDate": "",
+      "activityName": "",
+      "activityPreRequisite": "",
+      "activityReference": "",
+      "activityStartDate": "",
+      "activityStatus": "",
+      "activityType": "",
+      "addToDefaultActivityMaster": ""
+    }
+  ],
+  "notes": "",
+  "scheduleOriginalStartDt": "",
+  "scheduleStartDt": "",
+  "scheduleEndDt": "",
+  "scheduleStatus": "",
+  "softwareId": "",
+  "stdActivityIDs": [""],
+  "storeGroups": [
+    {
+      "storeGroupId": "",
+      "type": ""
+    }
+  ],
+  "stores": [
+    ""
+  ],
+  "technicianIDs": [
+    ""
+  ]
+}

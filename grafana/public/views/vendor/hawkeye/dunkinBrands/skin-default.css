@@ -1,0 +1,47 @@
+ fieldset{
+  border-color:#7B807E;
+ }
+ 
+ .content {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  margin-bottom: 2px;
+}
+
+ .container{
+    font-color:#7B807E;
+}
+
+.list-group{
+  font-family: arial;
+  font-size: 14px;
+  
+}
+
+.lowStock{
+  font-color:red;
+  color: red;
+}
+
+
+.addToCart{
+ 	background:#4EBF60;
+	color: rose; 
+}
+
+.checkNearBy{
+ 	background:#348C95;
+	color: rose; 
+}
+
+.chip{
+	padding: 8px 10px;
+	border-radius: 10px;
+	font-weight: 400;
+	font-size: 14px;
+	box-shadow: 0 2px 5px rgba(0,0,0,.25);
+	margin: 0 10px;
+	
+	cursor: pointer;
+}

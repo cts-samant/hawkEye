@@ -1,0 +1,34 @@
+{
+  
+  "newActivities": [
+    {      
+      "activityType": "",
+      "activityStatus": "",      
+      "activityDetails": "",
+      "activityPreRequisite": "",
+      "activityStartDate": "",
+      "activityEndDate": "",
+      "activityName": "",
+      "activityReference":
+      "addToDefaultActivityMaster": ""
+    }
+  ],
+
+  "notes": "",
+  "scheduleId": "",
+  "softwareId": "",
+  "scheduleDt": "",
+  "scheduleEndDt": "",
+  "scheduleStartDt": "",
+  "scheduleStatus": "",
+  "scheduleUserId": "",
+  "softwareId": "",
+  "softwareName": "",
+  "softwareVersion": "",
+
+  "stdActivityIDs": [""],
+  
+  "technicianIDs": [
+    ""
+  ]
+}

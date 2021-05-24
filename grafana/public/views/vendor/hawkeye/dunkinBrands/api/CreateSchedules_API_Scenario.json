@@ -1,0 +1,107 @@
+ Assumptions:
+ ============
+ 1. The attributes  - storeGroups, stores, stdActivityIDs, newActivities either can be empty or can have values in it. It won't be null at any scenario.
+ 2. RecordNewActivity flag should be at each newActivities level.
+ 3. In case, if any standard Activity doesn't exists in master, then microservice won't consider that activity while computing data for dunkin_store_schedule_activities table.
+ 4. There won't be any validation in microservice for existence of a store before inserting data in dunkin_store_schedules table.
+ 
+ 
+ Scenario-1: Store Groups : No new Activity ID:
+ ==============================================  
+  {
+        "scheduleDt": "2020-12-01T05:09:14",
+      	"storeGroups": ["615252"],
+        "softwareId": "microsCAL",
+        "softwareVersion": "7.2",
+        "scheduleUserId": "anupamsen",
+        "softwareName": " MicrosCAL Version",
+        "scheduleStatus": "In Progress",
+		"stdActivityIDs": ["A10002", "A10004", "A10011", "A10004","A10008", "A10007"],
+        "scheduleStartDt": "2020-12-01T05:09:14",
+        "scheduleEndDt": "2020-12-25T05:09:14",
+        "notes": "Testing CreateShedule API",
+		"technicianIDs": ["T222", "T34344", "T85544", "T34399"],
+        "createUserId": "TestUserId",
+        "modifyUserId": "TestUserId",
+		"newActivities": []
+}
+
+ 
+ Scenario-2: Store Groups : With new Activity ID:
+ ================================================
+ {
+        "scheduleDt": "2020-12-01T05:09:14",
+      	"storeGroups": ["615252"],
+        "softwareId": "microsCAL",
+        "softwareVersion": "7.2",
+        "scheduleUserId": "anupamsen",
+        "softwareName": " MicrosCAL Version",
+        "scheduleStatus": "In Progress",
+		"stdActivityIDs": ["A10002", "A10004", "A10011", "A10004","A10008", "A10007"],
+        "scheduleStartDt": "2020-12-01T05:09:14",
+        "scheduleEndDt": "2020-12-25T05:09:14",
+        "notes": "Testing CreateShedule API",
+		"technicianIDs": ["T222", "T34344", "T85544", "T34399"],
+        "createUserId": "TestUserId",
+        "modifyUserId": "TestUserId",
+		"IsReqToRecordNewActivitiesInMaster": "Y",
+		"newActivities": [{
+			"RecordNewActivity": "Y",
+			"activityType": "PreRequisite",
+			"activityDetails": "This is a new activity1",
+			"activityPreRequisite": "PreRequisite of the new activity1",
+			"activityReference": "DEFAULT",			
+			"activityStartDate": "2020-12-01T05:09:14",
+			"activityEndDate": "2020-12-31T05:09:14"
+		},
+		{
+			"RecordNewActivity": "N",
+			"activityType": "PreRequisite",
+			"activityDetails": "This is a new activity2",
+			"activityPreRequisite": "PreRequisite of the new activity2",
+			"activityReference": "DEFAULT",			
+			"activityStartDate": "2020-12-01T05:09:14",
+			"activityEndDate": "2020-12-31T05:09:14"
+
+		}
+	]
+}
+
+Scenario-3: Stores:
+==================
+{
+        "scheduleDt": "2020-12-01T05:09:14",
+      	"stores": ["356665","356666","356667","356668","356669","356670","356671","356672","356673","356674","356675","356676","356677","356678","356679","356680"],
+        "softwareId": "microsCAL",
+        "softwareVersion": "7.2",
+        "scheduleUserId": "anupamsen",
+        "softwareName": " MicrosCAL Version",
+        "scheduleStatus": "In Progress",
+		"stdActivityIDs": ["A10002", "A10004", "A10011", "A10004","A10008", "A10007"],
+        "scheduleStartDt": "2020-12-01T05:09:14",
+        "scheduleEndDt": "2020-12-25T05:09:14",
+        "notes": "Testing CreateShedule API",
+		"technicianIDs": ["T222", "T34344", "T85544", "T34399"],
+        "createUserId": "TestUserId",
+        "modifyUserId": "TestUserId",
+		"newActivities": [{
+			"RecordNewActivity": "Y",
+			"activityType": "PreRequisite",
+			"activityDetails": "This is a new activity1",
+			"activityPreRequisite": "PreRequisite of the new activity1",
+			"activityReference": "DEFAULT",			
+			"activityStartDate": "2020-12-01T05:09:14",
+			"activityEndDate": "2020-12-31T05:09:14"
+		},
+		{
+			"RecordNewActivity": "N",
+			"activityType": "PreRequisite",
+			"activityDetails": "This is a new activity2",
+			"activityPreRequisite": "PreRequisite of the new activity2",
+			"activityReference": "DEFAULT",			
+			"activityStartDate": "2020-12-01T05:09:14",
+			"activityEndDate": "2020-12-31T05:09:14"
+
+		}
+	]
+}

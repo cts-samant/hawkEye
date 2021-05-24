@@ -1,0 +1,1036 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<template encoding-version="1.3">
+    <description></description>
+    <groupId>6e0da6cd-0175-1000-3278-0cc6253a75e2</groupId>
+    <name>LoadHostsWithGroupJsonFileTemplate</name>
+    <snippet>
+        <processGroups>
+            <id>d20870b1-4f1a-3e5d-0000-000000000000</id>
+            <parentGroupId>39c6221a-cc4e-35eb-0000-000000000000</parentGroupId>
+            <position>
+                <x>0.0</x>
+                <y>0.0</y>
+            </position>
+            <comments></comments>
+            <contents>
+                <connections>
+                    <id>23c674d5-1476-37d8-0000-000000000000</id>
+                    <parentGroupId>d20870b1-4f1a-3e5d-0000-000000000000</parentGroupId>
+                    <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
+                    <backPressureObjectThreshold>10000</backPressureObjectThreshold>
+                    <destination>
+                        <groupId>d20870b1-4f1a-3e5d-0000-000000000000</groupId>
+                        <id>03b496cf-bd17-30b2-0000-000000000000</id>
+                        <type>PROCESSOR</type>
+                    </destination>
+                    <flowFileExpiration>0 sec</flowFileExpiration>
+                    <labelIndex>1</labelIndex>
+                    <loadBalanceCompression>DO_NOT_COMPRESS</loadBalanceCompression>
+                    <loadBalancePartitionAttribute></loadBalancePartitionAttribute>
+                    <loadBalanceStatus>LOAD_BALANCE_NOT_CONFIGURED</loadBalanceStatus>
+                    <loadBalanceStrategy>DO_NOT_LOAD_BALANCE</loadBalanceStrategy>
+                    <name></name>
+                    <selectedRelationships>success</selectedRelationships>
+                    <source>
+                        <groupId>d20870b1-4f1a-3e5d-0000-000000000000</groupId>
+                        <id>30b7bf15-0a70-3436-0000-000000000000</id>
+                        <type>PROCESSOR</type>
+                    </source>
+                    <zIndex>0</zIndex>
+                </connections>
+                <connections>
+                    <id>4cca3d38-5d79-3038-0000-000000000000</id>
+                    <parentGroupId>d20870b1-4f1a-3e5d-0000-000000000000</parentGroupId>
+                    <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
+                    <backPressureObjectThreshold>10000</backPressureObjectThreshold>
+                    <destination>
+                        <groupId>d20870b1-4f1a-3e5d-0000-000000000000</groupId>
+                        <id>3efca11a-d86a-3164-0000-000000000000</id>
+                        <type>PROCESSOR</type>
+                    </destination>
+                    <flowFileExpiration>0 sec</flowFileExpiration>
+                    <labelIndex>1</labelIndex>
+                    <loadBalanceCompression>DO_NOT_COMPRESS</loadBalanceCompression>
+                    <loadBalancePartitionAttribute></loadBalancePartitionAttribute>
+                    <loadBalanceStatus>LOAD_BALANCE_NOT_CONFIGURED</loadBalanceStatus>
+                    <loadBalanceStrategy>DO_NOT_LOAD_BALANCE</loadBalanceStrategy>
+                    <name></name>
+                    <selectedRelationships>failure</selectedRelationships>
+                    <source>
+                        <groupId>d20870b1-4f1a-3e5d-0000-000000000000</groupId>
+                        <id>30b7bf15-0a70-3436-0000-000000000000</id>
+                        <type>PROCESSOR</type>
+                    </source>
+                    <zIndex>0</zIndex>
+                </connections>
+                <connections>
+                    <id>f5694cee-c648-3ca7-0000-000000000000</id>
+                    <parentGroupId>d20870b1-4f1a-3e5d-0000-000000000000</parentGroupId>
+                    <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
+                    <backPressureObjectThreshold>10000</backPressureObjectThreshold>
+                    <destination>
+                        <groupId>d20870b1-4f1a-3e5d-0000-000000000000</groupId>
+                        <id>30b7bf15-0a70-3436-0000-000000000000</id>
+                        <type>PROCESSOR</type>
+                    </destination>
+                    <flowFileExpiration>0 sec</flowFileExpiration>
+                    <labelIndex>1</labelIndex>
+                    <loadBalanceCompression>DO_NOT_COMPRESS</loadBalanceCompression>
+                    <loadBalancePartitionAttribute></loadBalancePartitionAttribute>
+                    <loadBalanceStatus>LOAD_BALANCE_NOT_CONFIGURED</loadBalanceStatus>
+                    <loadBalanceStrategy>DO_NOT_LOAD_BALANCE</loadBalanceStrategy>
+                    <name></name>
+                    <selectedRelationships>success</selectedRelationships>
+                    <source>
+                        <groupId>d20870b1-4f1a-3e5d-0000-000000000000</groupId>
+                        <id>ea2086e8-6548-34db-0000-000000000000</id>
+                        <type>PROCESSOR</type>
+                    </source>
+                    <zIndex>0</zIndex>
+                </connections>
+                <connections>
+                    <id>fda97717-618d-3684-0000-000000000000</id>
+                    <parentGroupId>d20870b1-4f1a-3e5d-0000-000000000000</parentGroupId>
+                    <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
+                    <backPressureObjectThreshold>10000</backPressureObjectThreshold>
+                    <destination>
+                        <groupId>d20870b1-4f1a-3e5d-0000-000000000000</groupId>
+                        <id>ea2086e8-6548-34db-0000-000000000000</id>
+                        <type>PROCESSOR</type>
+                    </destination>
+                    <flowFileExpiration>0 sec</flowFileExpiration>
+                    <labelIndex>1</labelIndex>
+                    <loadBalanceCompression>DO_NOT_COMPRESS</loadBalanceCompression>
+                    <loadBalancePartitionAttribute></loadBalancePartitionAttribute>
+                    <loadBalanceStatus>LOAD_BALANCE_NOT_CONFIGURED</loadBalanceStatus>
+                    <loadBalanceStrategy>DO_NOT_LOAD_BALANCE</loadBalanceStrategy>
+                    <name></name>
+                    <selectedRelationships>success</selectedRelationships>
+                    <source>
+                        <groupId>d20870b1-4f1a-3e5d-0000-000000000000</groupId>
+                        <id>a527761b-49fb-3cf3-0000-000000000000</id>
+                        <type>PROCESSOR</type>
+                    </source>
+                    <zIndex>0</zIndex>
+                </connections>
+                <controllerServices>
+                    <id>24715c72-567a-30fe-0000-000000000000</id>
+                    <parentGroupId>d20870b1-4f1a-3e5d-0000-000000000000</parentGroupId>
+                    <bundle>
+                        <artifact>nifi-dbcp-service-nar</artifact>
+                        <group>org.apache.nifi</group>
+                        <version>1.12.1</version>
+                    </bundle>
+                    <comments></comments>
+                    <descriptors>
+                        <entry>
+                            <key>Database Connection URL</key>
+                            <value>
+<name>Database Connection URL</name>
+                            </value>
+                        </entry>
+                        <entry>
+                            <key>Database Driver Class Name</key>
+                            <value>
+<name>Database Driver Class Name</name>
+                            </value>
+                        </entry>
+                        <entry>
+                            <key>database-driver-locations</key>
+                            <value>
+<name>database-driver-locations</name>
+                            </value>
+                        </entry>
+                        <entry>
+                            <key>kerberos-credentials-service</key>
+                            <value>
+<identifiesControllerService>org.apache.nifi.kerberos.KerberosCredentialsService</identifiesControllerService>
+<name>kerberos-credentials-service</name>
+                            </value>
+                        </entry>
+                        <entry>
+                            <key>kerberos-principal</key>
+                            <value>
+<name>kerberos-principal</name>
+                            </value>
+                        </entry>
+                        <entry>
+                            <key>kerberos-password</key>
+                            <value>
+<name>kerberos-password</name>
+                            </value>
+                        </entry>
+                        <entry>
+                            <key>Database User</key>
+                            <value>
+<name>Database User</name>
+                            </value>
+                        </entry>
+                        <entry>
+                            <key>Password</key>
+                            <value>
+<name>Password</name>
+                            </value>
+                        </entry>
+                        <entry>
+                            <key>Max Wait Time</key>
+                            <value>
+<name>Max Wait Time</name>
+                            </value>
+                        </entry>
+                        <entry>
+                            <key>Max Total Connections</key>
+                            <value>
+<name>Max Total Connections</name>
+                            </value>
+                        </entry>
+                        <entry>
+                            <key>Validation-query</key>
+                            <value>
+<name>Validation-query</name>
+                            </value>
+                        </entry>
+                        <entry>
+                            <key>dbcp-min-idle-conns</key>
+                            <value>
+<name>dbcp-min-idle-conns</name>
+                            </value>
+                        </entry>
+                        <entry>
+                            <key>dbcp-max-idle-conns</key>
+                            <value>
+<name>dbcp-max-idle-conns</name>
+                            </value>
+                        </entry>
+                        <entry>
+                            <key>dbcp-max-conn-lifetime</key>
+                            <value>
+<name>dbcp-max-conn-lifetime</name>
+                            </value>
+                        </entry>
+                        <entry>
+                            <key>dbcp-time-between-eviction-runs</key>
+                            <value>
+<name>dbcp-time-between-eviction-runs</name>
+                            </value>
+                        </entry>
+                        <entry>
+                            <key>dbcp-min-evictable-idle-time</key>
+                            <value>
+<name>dbcp-min-evictable-idle-time</name>
+                            </value>
+                        </entry>
+                        <entry>
+                            <key>dbcp-soft-min-evictable-idle-time</key>
+                            <value>
+<name>dbcp-soft-min-evictable-idle-time</name>
+                            </value>
+                        </entry>
+                    </descriptors>
+                    <name>DBCPConnectionPoolForHostsAndGroups</name>
+                    <persistsState>false</persistsState>
+                    <properties>
+                        <entry>
+                            <key>Database Connection URL</key>
+                            <value>jdbc:postgresql://127.0.0.1:5432/groupsDB</value>
+                        </entry>
+                        <entry>
+                            <key>Database Driver Class Name</key>
+                            <value>org.postgresql.Driver</value>
+                        </entry>
+                        <entry>
+                            <key>database-driver-locations</key>
+                            <value>C:\HwakEye\apache-jmeter-5.3\apache-jmeter-5.3\lib\ext\postgresql-42.2.17.jar</value>
+                        </entry>
+                        <entry>
+                            <key>kerberos-credentials-service</key>
+                        </entry>
+                        <entry>
+                            <key>kerberos-principal</key>
+                        </entry>
+                        <entry>
+                            <key>kerberos-password</key>
+                        </entry>
+                        <entry>
+                            <key>Database User</key>
+                            <value>postgres</value>
+                        </entry>
+                        <entry>
+                            <key>Password</key>
+                        </entry>
+                        <entry>
+                            <key>Max Wait Time</key>
+                            <value>500 millis</value>
+                        </entry>
+                        <entry>
+                            <key>Max Total Connections</key>
+                            <value>8</value>
+                        </entry>
+                        <entry>
+                            <key>Validation-query</key>
+                        </entry>
+                        <entry>
+                            <key>dbcp-min-idle-conns</key>
+                            <value>0</value>
+                        </entry>
+                        <entry>
+                            <key>dbcp-max-idle-conns</key>
+                            <value>8</value>
+                        </entry>
+                        <entry>
+                            <key>dbcp-max-conn-lifetime</key>
+                            <value>-1</value>
+                        </entry>
+                        <entry>
+                            <key>dbcp-time-between-eviction-runs</key>
+                            <value>-1</value>
+                        </entry>
+                        <entry>
+                            <key>dbcp-min-evictable-idle-time</key>
+                            <value>30 mins</value>
+                        </entry>
+                        <entry>
+                            <key>dbcp-soft-min-evictable-idle-time</key>
+                            <value>-1</value>
+                        </entry>
+                    </properties>
+                    <state>ENABLED</state>
+                    <type>org.apache.nifi.dbcp.DBCPConnectionPool</type>
+                </controllerServices>
+                <processors>
+                    <id>03b496cf-bd17-30b2-0000-000000000000</id>
+                    <parentGroupId>d20870b1-4f1a-3e5d-0000-000000000000</parentGroupId>
+                    <position>
+                        <x>848.0</x>
+                        <y>360.0</y>
+                    </position>
+                    <bundle>
+                        <artifact>nifi-standard-nar</artifact>
+                        <group>org.apache.nifi</group>
+                        <version>1.12.1</version>
+                    </bundle>
+                    <config>
+                        <bulletinLevel>WARN</bulletinLevel>
+                        <comments></comments>
+                        <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
+                        <descriptors>
+                            <entry>
+<key>Log Level</key>
+<value>
+    <name>Log Level</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Log Payload</key>
+<value>
+    <name>Log Payload</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Attributes to Log</key>
+<value>
+    <name>Attributes to Log</name>
+</value>
+                            </entry>
+                            <entry>
+<key>attributes-to-log-regex</key>
+<value>
+    <name>attributes-to-log-regex</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Attributes to Ignore</key>
+<value>
+    <name>Attributes to Ignore</name>
+</value>
+                            </entry>
+                            <entry>
+<key>attributes-to-ignore-regex</key>
+<value>
+    <name>attributes-to-ignore-regex</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Log prefix</key>
+<value>
+    <name>Log prefix</name>
+</value>
+                            </entry>
+                            <entry>
+<key>character-set</key>
+<value>
+    <name>character-set</name>
+</value>
+                            </entry>
+                        </descriptors>
+                        <executionNode>ALL</executionNode>
+                        <lossTolerant>false</lossTolerant>
+                        <penaltyDuration>30 sec</penaltyDuration>
+                        <properties>
+                            <entry>
+<key>Log Level</key>
+<value>info</value>
+                            </entry>
+                            <entry>
+<key>Log Payload</key>
+<value>false</value>
+                            </entry>
+                            <entry>
+<key>Attributes to Log</key>
+                            </entry>
+                            <entry>
+<key>attributes-to-log-regex</key>
+<value>.*</value>
+                            </entry>
+                            <entry>
+<key>Attributes to Ignore</key>
+                            </entry>
+                            <entry>
+<key>attributes-to-ignore-regex</key>
+                            </entry>
+                            <entry>
+<key>Log prefix</key>
+                            </entry>
+                            <entry>
+<key>character-set</key>
+<value>windows-1252</value>
+                            </entry>
+                        </properties>
+                        <runDurationMillis>0</runDurationMillis>
+                        <schedulingPeriod>0 sec</schedulingPeriod>
+                        <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
+                        <yieldDuration>1 sec</yieldDuration>
+                    </config>
+                    <executionNodeRestricted>false</executionNodeRestricted>
+                    <name>LogAttribute</name>
+                    <relationships>
+                        <autoTerminate>true</autoTerminate>
+                        <name>success</name>
+                    </relationships>
+                    <state>STOPPED</state>
+                    <style/>
+                    <type>org.apache.nifi.processors.standard.LogAttribute</type>
+                </processors>
+                <processors>
+                    <id>30b7bf15-0a70-3436-0000-000000000000</id>
+                    <parentGroupId>d20870b1-4f1a-3e5d-0000-000000000000</parentGroupId>
+                    <position>
+                        <x>248.0</x>
+                        <y>232.0</y>
+                    </position>
+                    <bundle>
+                        <artifact>nifi-groovyx-nar</artifact>
+                        <group>org.apache.nifi</group>
+                        <version>1.12.1</version>
+                    </bundle>
+                    <config>
+                        <bulletinLevel>WARN</bulletinLevel>
+                        <comments></comments>
+                        <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
+                        <descriptors>
+                            <entry>
+<key>groovyx-script-file</key>
+<value>
+    <name>groovyx-script-file</name>
+</value>
+                            </entry>
+                            <entry>
+<key>groovyx-script-body</key>
+<value>
+    <name>groovyx-script-body</name>
+</value>
+                            </entry>
+                            <entry>
+<key>groovyx-failure-strategy</key>
+<value>
+    <name>groovyx-failure-strategy</name>
+</value>
+                            </entry>
+                            <entry>
+<key>groovyx-additional-classpath</key>
+<value>
+    <name>groovyx-additional-classpath</name>
+</value>
+                            </entry>
+                            <entry>
+<key>SQL.mydb</key>
+<value>
+    <identifiesControllerService>org.apache.nifi.dbcp.DBCPService</identifiesControllerService>
+    <name>SQL.mydb</name>
+</value>
+                            </entry>
+                        </descriptors>
+                        <executionNode>ALL</executionNode>
+                        <lossTolerant>false</lossTolerant>
+                        <penaltyDuration>30 sec</penaltyDuration>
+                        <properties>
+                            <entry>
+<key>groovyx-script-file</key>
+                            </entry>
+                            <entry>
+<key>groovyx-script-body</key>
+<value>import groovy.json.JsonSlurper
+import groovy.json.JsonBuilder
+import java.time.LocalDateTime
+import java.util.logging.Logger;
+
+ 
+
+/**
+ * @author Pradipta Hore
+ *
+ */
+
+ 
+
+//begin
+//getting the content from the sTotal Lines :session flowfile
+def ff=session.get()
+if (ff == null) {
+    return
+}
+
+ 
+
+Logger log = Logger.getLogger("HostsWithGroupsLog");
+String strInputData = new File("C:\\Data_Items\\HostswithGroups.json").text
+json_sup = new JsonSlurper()
+json_response = json_sup.parseText(strInputData)
+
+ 
+
+LocalDateTime date = LocalDateTime.now()
+String date_time = date.format("yyyy-MM-dd hh:mm:ss.SSS")
+log.info("date="+date_time)
+
+ 
+
+int lines1=0, lines=0
+String str, store_id, terminal_type, group_nm, rowInDB=""
+long startTime, endTime
+def flowfiledata
+def results = []
+ArrayList&lt;String&gt; queries = new ArrayList&lt;String&gt;();
+
+ 
+
+try {
+    startTime = System.currentTimeMillis();
+    for (int i = 0; i &lt; json_response.hosts.size(); i++) {
+        //Logic for store_id &amp; terminal_type
+        str = json_response.hosts.description[i]
+
+ 
+
+        if (str.contains("WSKDS")) {
+            store_id = str[-6..-1]
+            terminal_type = "KDS"
+        }
+        else if (str.contains("POS") &amp;&amp; str.length()&gt;11){
+            store_id = str.substring(2,8)
+            terminal_type = "POS"
+        }
+        else {
+            store_id = str
+            terminal_type = "UAT"
+        }
+        for (int j = 0; j &lt; json_response.groups.size(); j++){
+            if (json_response.groups.id[j] == json_response.hosts.groupid[i])
+                group_nm = json_response.groups.name[j]
+        }
+
+ 
+
+        //Preparing SQL Query
+        def query = "INSERT INTO public.\"HostswithGroups\"(store_id, group_id, group_name, terminal_id, terminal_desc, \"hostStateChangeDate\", \"isHostOnline\", terminal_type, createts, modifyts) " +
+                "VALUES ('"+store_id+
+                "','"+json_response.hosts.groupid[i]+
+                "','"+group_nm+"','"+json_response.hosts.id[i]+
+                "','"+json_response.hosts.description[i]+
+                "','"+json_response.hosts.hostStateChangeDate[i]+
+                "','"+json_response.hosts.isHostOnline[i]+
+                "','"+terminal_type+
+                "','"+date_time+
+                "','"+date_time+"');"
+
+ 
+
+        queries.add(query)
+    }// End of For Loop i
+
+ 
+
+        //log.info("\n query " + query);
+        try {
+            SQL.mydb.withTransaction {
+                SQL.mydb.withBatch(100) { stmt -&gt;
+                    queries.each { query -&gt;
+                        stmt.addBatch(query);
+                    }
+                }
+                results = "{True}"
+            }
+        } catch (Exception e) {
+            log.info("\n Error Loading data for " +e);
+            log.info("........................................");
+            def filename = "HWG_DBerror.txt"
+            def ipfile = new File("C:\\Error_Files\\"+filename)
+            if(ipfile.exists()) {
+                ipfile.append(e.toString())
+            }
+            else {
+                ipfile.write(e.toString())
+            }
+
+ 
+
+            BufferedReader reader = new BufferedReader(new FileReader("C:\\Error_Files\\HWG_DBerror.txt"));
+            while (reader.readLine() != null) lines++;
+            reader.close();
+
+ 
+
+            results="{False}"
+            ff.write("UTF-8"){writer-&gt;
+                new JsonBuilder(results).writeTo(writer)
+            }
+            //transfer to failure
+            REL_FAILURE &lt;&lt; ff
+        }
+
+ 
+
+    endTime = System.currentTimeMillis();
+
+ 
+
+    def countQuery = "SELECT COUNT(*) AS \"Success\" FROM public.\"HostswithGroups\""
+    SQL.mydb.withTransaction {
+        rowInDB = SQL.mydb.firstRow(countQuery);
+        //results = "{True}"
+    }
+
+ 
+
+/*//write results as a new flow file content
+    ff.write("UTF-8") { writer -&gt;
+        new JsonBuilder(results).writeTo(writer)
+    }
+//transfer to success
+    REL_SUCCESS &lt;&lt; ff*/
+}
+catch(ex) {
+    results="{False}"
+    log.info('!! Error while Data Audit:'+ ex.printStackTrace())
+    //write results as a new flow file content
+    //def content = ex.printStackTrace()
+    def filename = "HWG_DataError.txt"
+    def ipfile = new File("C:\\Error_Files\\"+filename)
+    if(ipfile.exists()) {
+        ipfile.write(ex.toString())
+    }
+    else{
+        ipfile.write(ex.toString())
+    }
+    BufferedReader reader = new BufferedReader(new FileReader("C:\\Error_Files\\"+filename));
+    while (reader.readLine() != null) lines1++;
+    reader.close();
+    ff.write("UTF-8"){writer-&gt;
+        new JsonBuilder(results).writeTo(writer)
+    }
+    //transfer to failure
+    REL_FAILURE &lt;&lt; ff
+}
+
+ 
+
+flowfiledata = " Total No of records in file  HostswithGroups.json : "+json_response.hosts.size()+"\n"+
+        " Total records loaded into DB : "+rowInDB.replaceAll("[{|}|:]", "")+"\n"+
+        " Total Time taken : "+(endTime-startTime)/1000+" Sec\n"+
+        " Total records errored -  \n"+
+        "     Database Error : "+lines/2+"\n"+
+        "     Data Error : "+lines1+"\n"
+if (results=="{True}") {
+    ff.write("UTF-8", flowfiledata)
+    REL_SUCCESS &lt;&lt; ff
+}</value>
+                            </entry>
+                            <entry>
+<key>groovyx-failure-strategy</key>
+<value>rollback</value>
+                            </entry>
+                            <entry>
+<key>groovyx-additional-classpath</key>
+                            </entry>
+                            <entry>
+<key>SQL.mydb</key>
+<value>24715c72-567a-30fe-0000-000000000000</value>
+                            </entry>
+                        </properties>
+                        <runDurationMillis>0</runDurationMillis>
+                        <schedulingPeriod>3000 sec</schedulingPeriod>
+                        <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
+                        <yieldDuration>1 sec</yieldDuration>
+                    </config>
+                    <executionNodeRestricted>false</executionNodeRestricted>
+                    <name>ExecuteGroovyScript-PushDataToPostgreSQL</name>
+                    <relationships>
+                        <autoTerminate>false</autoTerminate>
+                        <name>failure</name>
+                    </relationships>
+                    <relationships>
+                        <autoTerminate>false</autoTerminate>
+                        <name>success</name>
+                    </relationships>
+                    <state>STOPPED</state>
+                    <style>
+                        <entry>
+                            <key>background-color</key>
+                            <value>#ffffff</value>
+                        </entry>
+                    </style>
+                    <type>org.apache.nifi.processors.groovyx.ExecuteGroovyScript</type>
+                </processors>
+                <processors>
+                    <id>3efca11a-d86a-3164-0000-000000000000</id>
+                    <parentGroupId>d20870b1-4f1a-3e5d-0000-000000000000</parentGroupId>
+                    <position>
+                        <x>424.0</x>
+                        <y>520.0</y>
+                    </position>
+                    <bundle>
+                        <artifact>nifi-standard-nar</artifact>
+                        <group>org.apache.nifi</group>
+                        <version>1.12.1</version>
+                    </bundle>
+                    <config>
+                        <bulletinLevel>WARN</bulletinLevel>
+                        <comments></comments>
+                        <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
+                        <descriptors>
+                            <entry>
+<key>Log Level</key>
+<value>
+    <name>Log Level</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Log Payload</key>
+<value>
+    <name>Log Payload</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Attributes to Log</key>
+<value>
+    <name>Attributes to Log</name>
+</value>
+                            </entry>
+                            <entry>
+<key>attributes-to-log-regex</key>
+<value>
+    <name>attributes-to-log-regex</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Attributes to Ignore</key>
+<value>
+    <name>Attributes to Ignore</name>
+</value>
+                            </entry>
+                            <entry>
+<key>attributes-to-ignore-regex</key>
+<value>
+    <name>attributes-to-ignore-regex</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Log prefix</key>
+<value>
+    <name>Log prefix</name>
+</value>
+                            </entry>
+                            <entry>
+<key>character-set</key>
+<value>
+    <name>character-set</name>
+</value>
+                            </entry>
+                        </descriptors>
+                        <executionNode>ALL</executionNode>
+                        <lossTolerant>false</lossTolerant>
+                        <penaltyDuration>30 sec</penaltyDuration>
+                        <properties>
+                            <entry>
+<key>Log Level</key>
+<value>error</value>
+                            </entry>
+                            <entry>
+<key>Log Payload</key>
+<value>false</value>
+                            </entry>
+                            <entry>
+<key>Attributes to Log</key>
+                            </entry>
+                            <entry>
+<key>attributes-to-log-regex</key>
+<value>.*</value>
+                            </entry>
+                            <entry>
+<key>Attributes to Ignore</key>
+                            </entry>
+                            <entry>
+<key>attributes-to-ignore-regex</key>
+                            </entry>
+                            <entry>
+<key>Log prefix</key>
+                            </entry>
+                            <entry>
+<key>character-set</key>
+<value>windows-1252</value>
+                            </entry>
+                        </properties>
+                        <runDurationMillis>0</runDurationMillis>
+                        <schedulingPeriod>0 sec</schedulingPeriod>
+                        <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
+                        <yieldDuration>1 sec</yieldDuration>
+                    </config>
+                    <executionNodeRestricted>false</executionNodeRestricted>
+                    <name>LogAttribute</name>
+                    <relationships>
+                        <autoTerminate>true</autoTerminate>
+                        <name>success</name>
+                    </relationships>
+                    <state>STOPPED</state>
+                    <style/>
+                    <type>org.apache.nifi.processors.standard.LogAttribute</type>
+                </processors>
+                <processors>
+                    <id>a527761b-49fb-3cf3-0000-000000000000</id>
+                    <parentGroupId>d20870b1-4f1a-3e5d-0000-000000000000</parentGroupId>
+                    <position>
+                        <x>176.0</x>
+                        <y>-56.0</y>
+                    </position>
+                    <bundle>
+                        <artifact>nifi-standard-nar</artifact>
+                        <group>org.apache.nifi</group>
+                        <version>1.12.1</version>
+                    </bundle>
+                    <config>
+                        <bulletinLevel>WARN</bulletinLevel>
+                        <comments></comments>
+                        <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
+                        <descriptors>
+                            <entry>
+<key>File Size</key>
+<value>
+    <name>File Size</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Batch Size</key>
+<value>
+    <name>Batch Size</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Data Format</key>
+<value>
+    <name>Data Format</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Unique FlowFiles</key>
+<value>
+    <name>Unique FlowFiles</name>
+</value>
+                            </entry>
+                            <entry>
+<key>generate-ff-custom-text</key>
+<value>
+    <name>generate-ff-custom-text</name>
+</value>
+                            </entry>
+                            <entry>
+<key>character-set</key>
+<value>
+    <name>character-set</name>
+</value>
+                            </entry>
+                            <entry>
+<key>mime-type</key>
+<value>
+    <name>mime-type</name>
+</value>
+                            </entry>
+                        </descriptors>
+                        <executionNode>ALL</executionNode>
+                        <lossTolerant>false</lossTolerant>
+                        <penaltyDuration>30 sec</penaltyDuration>
+                        <properties>
+                            <entry>
+<key>File Size</key>
+<value>0B</value>
+                            </entry>
+                            <entry>
+<key>Batch Size</key>
+<value>1</value>
+                            </entry>
+                            <entry>
+<key>Data Format</key>
+<value>Text</value>
+                            </entry>
+                            <entry>
+<key>Unique FlowFiles</key>
+<value>false</value>
+                            </entry>
+                            <entry>
+<key>generate-ff-custom-text</key>
+                            </entry>
+                            <entry>
+<key>character-set</key>
+<value>UTF-8</value>
+                            </entry>
+                            <entry>
+<key>mime-type</key>
+                            </entry>
+                        </properties>
+                        <runDurationMillis>0</runDurationMillis>
+                        <schedulingPeriod>3600 sec</schedulingPeriod>
+                        <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
+                        <yieldDuration>1 sec</yieldDuration>
+                    </config>
+                    <executionNodeRestricted>false</executionNodeRestricted>
+                    <name>GenerateFlowFile</name>
+                    <relationships>
+                        <autoTerminate>false</autoTerminate>
+                        <name>success</name>
+                    </relationships>
+                    <state>STOPPED</state>
+                    <style/>
+                    <type>org.apache.nifi.processors.standard.GenerateFlowFile</type>
+                </processors>
+                <processors>
+                    <id>ea2086e8-6548-34db-0000-000000000000</id>
+                    <parentGroupId>d20870b1-4f1a-3e5d-0000-000000000000</parentGroupId>
+                    <position>
+                        <x>976.0</x>
+                        <y>16.0</y>
+                    </position>
+                    <bundle>
+                        <artifact>nifi-standard-nar</artifact>
+                        <group>org.apache.nifi</group>
+                        <version>1.12.1</version>
+                    </bundle>
+                    <config>
+                        <bulletinLevel>WARN</bulletinLevel>
+                        <comments></comments>
+                        <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
+                        <descriptors>
+                            <entry>
+<key>Log Level</key>
+<value>
+    <name>Log Level</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Log Payload</key>
+<value>
+    <name>Log Payload</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Attributes to Log</key>
+<value>
+    <name>Attributes to Log</name>
+</value>
+                            </entry>
+                            <entry>
+<key>attributes-to-log-regex</key>
+<value>
+    <name>attributes-to-log-regex</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Attributes to Ignore</key>
+<value>
+    <name>Attributes to Ignore</name>
+</value>
+                            </entry>
+                            <entry>
+<key>attributes-to-ignore-regex</key>
+<value>
+    <name>attributes-to-ignore-regex</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Log prefix</key>
+<value>
+    <name>Log prefix</name>
+</value>
+                            </entry>
+                            <entry>
+<key>character-set</key>
+<value>
+    <name>character-set</name>
+</value>
+                            </entry>
+                        </descriptors>
+                        <executionNode>ALL</executionNode>
+                        <lossTolerant>false</lossTolerant>
+                        <penaltyDuration>30 sec</penaltyDuration>
+                        <properties>
+                            <entry>
+<key>Log Level</key>
+<value>info</value>
+                            </entry>
+                            <entry>
+<key>Log Payload</key>
+<value>false</value>
+                            </entry>
+                            <entry>
+<key>Attributes to Log</key>
+                            </entry>
+                            <entry>
+<key>attributes-to-log-regex</key>
+<value>.*</value>
+                            </entry>
+                            <entry>
+<key>Attributes to Ignore</key>
+                            </entry>
+                            <entry>
+<key>attributes-to-ignore-regex</key>
+                            </entry>
+                            <entry>
+<key>Log prefix</key>
+                            </entry>
+                            <entry>
+<key>character-set</key>
+<value>windows-1252</value>
+                            </entry>
+                        </properties>
+                        <runDurationMillis>0</runDurationMillis>
+                        <schedulingPeriod>0 sec</schedulingPeriod>
+                        <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
+                        <yieldDuration>1 sec</yieldDuration>
+                    </config>
+                    <executionNodeRestricted>false</executionNodeRestricted>
+                    <name>LogAttribute</name>
+                    <relationships>
+                        <autoTerminate>false</autoTerminate>
+                        <name>success</name>
+                    </relationships>
+                    <state>STOPPED</state>
+                    <style/>
+                    <type>org.apache.nifi.processors.standard.LogAttribute</type>
+                </processors>
+            </contents>
+            <flowfileConcurrency>UNBOUNDED</flowfileConcurrency>
+            <flowfileOutboundPolicy>STREAM_WHEN_AVAILABLE</flowfileOutboundPolicy>
+            <name>LoadHostsWithGroupJsonFile</name>
+            <variables/>
+        </processGroups>
+    </snippet>
+    <timestamp>12/14/2020 17:42:30 IST</timestamp>
+</template>
